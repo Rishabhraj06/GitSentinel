@@ -3,6 +3,10 @@
 > **Autonomous Pre-Flight Security Scanner & AI Git Copilot for Developers**  
 > *Catch secret leaks, eliminate repo bloat, and generate conventional commit messages before code leaves your machine.*
 
+<div align="center">
+  <img src="assets/demo.gif" width="100%" alt="GitSentinel Live Demo Video"/>
+</div>
+
 ---
 
 ## ⚡ Interactive Terminal Demo
