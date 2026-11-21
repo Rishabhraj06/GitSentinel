@@ -5,6 +5,46 @@
 
 ---
 
+## ⚡ Interactive Terminal Demo
+
+```bash
+$ gitsentinel scan
+🔍 Scanning directory: C:\Projects\MyAgent
+
+Found 3 item(s):
+1. 🚨 CRITICAL [SECRET] in .env.local:1
+   Dangerous sensitive file detected: '.env.local'. Must be added to .gitignore.
+
+2. 🚨 CRITICAL [SECRET] in config.py:12
+   Potential leak detected: OpenAI API Secret Key
+   Snippet: OPENAI_API_KEY = "sk-a****9821"
+
+3. ⚠️  HIGH [BLOAT] in __pycache__
+   Untracked/staged bloat directory detected: '__pycache__'.
+
+Summary: 2 critical, 1 non-critical.
+❌ GitSentinel: Commit blocked. Fix reported leaks before pushing!
+
+$ gitsentinel doctor
+🩺 Diagnosing repository health...
+Repository Health Score: 95/100 [✓ PASS]
+[✓ PASS] Git Initialization
+[✓ PASS] .gitignore Hygiene
+[✓ PASS] Documentation & License
+[✓ PASS] Tracked Blob Sizes (<10MB)
+
+$ gitsentinel commit --hint "add multi-agent routing"
+🤖 Synthesizing Conventional Commit Message...
+Proposed Title: feat(agents): implement dynamic multi-agent task routing
+Change Description:
+  - Modified 3 files:
+    * agents/router.py
+    * tests/test_router.py
+    * config.json
+```
+
+---
+
 ## ⚡ Why GitSentinel?
 
 Every developer makes mistakes before pushing code:
@@ -61,42 +101,20 @@ pip install -e .
 
 ---
 
-## 💻 Usage Examples
+## 💻 Usage Commands
 
-### 1. Scan Current Repository for Risks
-```bash
-# Scan working directory
-gitsentinel scan
-
-# Scan and fail CI/pre-commit on critical secrets
-gitsentinel scan --fail-on-critical
-```
-
-### 2. Run Repository Health Doctor
-```bash
-gitsentinel doctor
-```
-
-### 3. Generate Conventional Commit
-```bash
-# Preview suggested commit title and change breakdown
-gitsentinel commit
-
-# Supply an optional intent hint
-gitsentinel commit --hint "implement user authentication"
-
-# Auto-execute git commit directly
-gitsentinel commit --auto
-```
-
-### 4. Install Pre-Commit Security Hook
-```bash
-gitsentinel install-hook
-```
+| Command | Action |
+| :--- | :--- |
+| `gitsentinel scan` | Scans working tree for API keys, passwords, and bloat |
+| `gitsentinel scan --fail-on-critical` | Non-zero exit code if critical leaks found (CI/CD ready) |
+| `gitsentinel doctor` | Evaluates repository hygiene and gives a 0-100 health score |
+| `gitsentinel commit` | Analyzes diff and proposes conventional commit title & bullets |
+| `gitsentinel commit --auto` | Automatically executes git commit with generated message |
+| `gitsentinel install-hook` | Installs automatic pre-commit safety gate |
 
 ---
 
-## 🧪 Real-World Verification
+## 🧪 Verification & Unit Tests
 
 GitSentinel comes with an automated Pytest test suite covering all security detectors, AST parsers, and diagnostic engines:
 
